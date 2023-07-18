@@ -1,17 +1,20 @@
-import Pokemon from "./pokemon";
+import Pokemon from "./Pokemon";
 
 const pokemon = [
   {
     name: "Bulbasaur",
     type: "Grass/Poison",
+    level: 0,
   },
   {
     name: "Ivysaur",
     type: "Grass/Poison",
+    level: 0,
   },
   {
     name: "Venusaur",
     type: "Grass/Poison",
+    level: 0,
   },
 ];
 
