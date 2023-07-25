@@ -1,31 +1,26 @@
 import { useState } from "react";
 import "./App.css";
 import List from "./components/List";
+import Effect from "./components/Effect";
 
 const STUDENT = {
   name: "Pippo",
   vote: 0,
 };
 
-function App() {
+export default function App() {
   const [count, setCount] = useState(0);
   function add() {
     setCount((prev) => prev + 1);
-    if (true) {
-      setCount((prev) => prev + 1);
-    }
+    setCount((prev) => prev + 1);
   }
 
   return (
     <>
-      <List />
-      <CounterView count={count} />
-      <Counter add={add} />
+      <Effect />
     </>
   );
 }
-
-export default App;
 
 function Counter({ add }) {
   return (
