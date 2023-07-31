@@ -1,54 +1,54 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./App.css";
-import List from "./components/List";
-import Effect from "./components/Effect";
-
-const STUDENT = {
-  name: "Pippo",
-  vote: 0,
-};
+import NameContext from "./NameContext";
+import { useName } from "./useName";
+import Shop from "./components/Shop";
 
 export default function App() {
-  const [count, setCount] = useState(0);
-  function add() {
-    setCount((prev) => prev + 1);
-    setCount((prev) => prev + 1);
-  }
-
+  const name = useName("pluto");
   return (
-    <>
-      <Effect />
-    </>
+    <Name hookName={name}>
+      <Shop />
+    </Name>
   );
 }
 
-function Counter({ add }) {
+function Name({ children, hookName }) {
+  const [name, setName] = useState(hookName);
+  function addXtoName() {
+    setName(name + "x");
+  }
+  return (
+    <NameContext.Provider
+      value={{
+        name: name,
+        addXtoName: addXtoName,
+      }}
+    >
+      {children}
+    </NameContext.Provider>
+  );
+}
+
+function Section() {
   return (
     <div>
-      <button onClick={add}>Add 1 to counter</button>
+      <Element />
     </div>
   );
 }
 
-function CounterView({ count }) {
-  return <div>{count}</div>;
-}
-
-function Student({ parentStudent }) {
-  const [student, setStudent] = useState(parentStudent);
-
-  function add() {
-    setStudent({
-      ...student,
-      vote: student.vote + 1,
-    });
-  }
-
+function Element() {
+  const { name, addXtoName } = useContext(NameContext);
   return (
     <div>
-      <div>Name: {student.name}</div>
-      <div>Vote: {student.vote}</div>
-      <button onClick={add}>INCREMENT VOTE</button>
+      <button onClick={addXtoName}>ADD X!</button>
     </div>
   );
+}
+
+function Bellebbuono() {
+  const { name } = useContext(NameContext);
+
+  return <div>IL NOME È {name}</div>;
 }
